@@ -2,10 +2,19 @@ import os
 from pydub import AudioSegment
 import youtube_dl
 
+def crearCarpetaSalida(ruta):
+    rutaProcesado = f"{ruta}/Procesado"
+    if not os.path.isdir(rutaProcesado):
+        os.makedirs(rutaProcesado)
+
 
 def directorios():
     ruta = os.getcwd()
     rutaMusica = os.listdir(ruta)
+
+    # if not os.path.isdir(rutaProcesado):
+    #     os.makedirs(rutaProcesado)
+
 
     return ruta, rutaMusica
 
@@ -37,6 +46,7 @@ def descargar_audio_youtube(archivo_enlaces):
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([enlace])
+            os.system('youtube-dl --rm-cache-dir')
 
 
 def ralentizaAudio(ruta, rutaMusica):
@@ -53,7 +63,7 @@ def ralentizaAudio(ruta, rutaMusica):
             nombreNuevo, extension = separarNombreyExtension(archivo)
 
             audio.export(
-                f"{ruta}/Procesado/{nombreNuevo} - SLOWED by pyScrewer.{extension}", format="mp3")
+                f"{ruta}/Procesado/{nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
 
     print("¡Archivos exportados exitosamente!")
 
@@ -72,6 +82,7 @@ def main():
     enlacesDeYoutube = "Enlaces.txt"
     descargar_audio_youtube(enlacesDeYoutube)
     ruta, rutaMusica = directorios()
+    crearCarpetaSalida(ruta)
     ralentizaAudio(ruta, rutaMusica)
     borrarBasura(ruta)
 
