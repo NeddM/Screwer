@@ -54,3 +54,5 @@ python3 main.py
 ```
 
 Cuando el script se haya ejecutado, luego tendrás una carpeta llamada `Procesado`, dentro de la carpeta del script.
+
+Dentro de la carpeta `Procesado`estarán las canciones ralentizadas.
