@@ -1,38 +1,35 @@
 import os
+import subprocess
+from time import sleep
 from pydub import AudioSegment
 import youtube_dl
-
-def crearCarpetaSalida(ruta):
-    rutaProcesado = f"{ruta}/Procesado"
-    if not os.path.isdir(rutaProcesado):
-        os.makedirs(rutaProcesado)
 
 
 def directorios():
     ruta = os.getcwd()
     rutaMusica = os.listdir(ruta)
 
-    # if not os.path.isdir(rutaProcesado):
-    #     os.makedirs(rutaProcesado)
-
+    rutaProcesado = f"{ruta}/Procesado/"
+    if not os.path.isdir(rutaProcesado):
+        os.makedirs(rutaProcesado)
 
     return ruta, rutaMusica
 
 
-def separarNombreyExtension(filename):
-    sname = ""
-    sext = ""
-    i = filename.rfind(".")
+def separarNombreyExtension(archivo):
+    trozoNombre = ""
+    trozoExtension = ""
+    i = archivo.rfind(".")
     if (i != 0):
-        n = len(filename)
+        n = len(archivo)
         j = n-i-1
-        sname = filename[0:i]
-        sext = filename[-j:]
+        trozoNombre = archivo[0:i]
+        trozoExtension = archivo[-j:]
 
-    return sname, sext
+    return trozoNombre, trozoExtension
 
 
-def descargar_audio_youtube(archivo_enlaces):
+def descargarAudioYoutube(archivo_enlaces):
     with open(archivo_enlaces, 'r') as f:
         for enlace in f:
             ydl_opts = {
@@ -47,6 +44,7 @@ def descargar_audio_youtube(archivo_enlaces):
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([enlace])
             os.system('youtube-dl --rm-cache-dir')
+            limpiarPantalla()
 
 
 def ralentizaAudio(ruta, rutaMusica):
@@ -65,6 +63,7 @@ def ralentizaAudio(ruta, rutaMusica):
             audio.export(
                 f"{ruta}/Procesado/{nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
 
+    limpiarPantalla()
     print("¡Archivos exportados exitosamente!")
 
 
@@ -78,11 +77,35 @@ def borrarBasura(ruta):
             os.remove(rutaCompleta)
 
 
+def firma():
+    print("""
+                __________                               .___
+    ______ ___.__.\\______   \\__ _______________   ____   __| _/
+    \\____ <   |  | |     ___/  |  \\_  __ \\____ \\_/ __ \\ / __ | 
+    |  |_> >___  | |    |   |  |  /|  | \\/  |_> >  ___// /_/ | 
+    |   __// ____| |____|   |____/ |__|  |   __/ \\___  >____ | 
+    |__|   \\/                            |__|        \\/     \\/ 
+                                                            
+
+                    https://github.com/NeddM
+    """)
+
+    sleep(4)
+    limpiarPantalla()
+
+
+def limpiarPantalla():
+    if os.name == "nt":
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
+
+
 def main():
+    firma()
     enlacesDeYoutube = "Enlaces.txt"
-    descargar_audio_youtube(enlacesDeYoutube)
+    descargarAudioYoutube(enlacesDeYoutube)
     ruta, rutaMusica = directorios()
-    crearCarpetaSalida(ruta)
     ralentizaAudio(ruta, rutaMusica)
     borrarBasura(ruta)
 
