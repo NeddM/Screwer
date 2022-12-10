@@ -47,6 +47,8 @@ https://youtu.be/rpaonSDPw7Y
 https://youtu.be/L8aIUhkeoxI
 ```
 
+`¡También puedes poner el enlace de una playlist!`
+
 Una vez tienes los enlaces guardados en el achivo **Enlaces.txt**, ya podemos ejecutar el script, de la siguiente forma:
 
 ```bash
