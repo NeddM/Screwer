@@ -1,5 +1,3 @@
-# Historia
-
 ```art
                                 __________                               .___
                     ______ ___.__.\______   \__ _______________   ____   __| _/
@@ -8,6 +6,8 @@
                     |   __// ____| |____|   |____/ |__|  |   __/ \___  >____ |
                     |__|   \/                            |__|        \/     \/
 ```
+
+# Historia
 
 Para empezar, viene bien conocer lo que es la música [**Chopped and Screwed**](https://es.wikipedia.org/wiki/Chopped_and_screwed), género creado por [Dj Screw](https://en.wikipedia.org/wiki/DJ_Screw) en Houston, Tejas, en la década de los 90, y que se basa en ralentizar canciones.
 La gente se dió cuenta de que se puede disfrutar mucho mejor la música cuando está ralentizada. De esta manera se aprecian mucho más los tonos, la letra, y la música en general.
