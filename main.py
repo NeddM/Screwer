@@ -48,6 +48,7 @@ def descargarAudioYoutube(archivo_enlaces):
 
 
 def ralentizaAudio(ruta, rutaMusica):
+    i = 1
     for archivo in rutaMusica:
         if archivo.endswith(".mp3"):
 
@@ -61,7 +62,9 @@ def ralentizaAudio(ruta, rutaMusica):
             nombreNuevo, extension = separarNombreyExtension(archivo)
 
             audio.export(
-                f"{ruta}/Procesado/{nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
+                f"{ruta}/Procesado/{i} - {nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
+
+            i += 1
 
     limpiarPantalla()
     print("¡Archivos exportados exitosamente!")
@@ -75,6 +78,9 @@ def borrarBasura(ruta):
 
         if rutaCompleta.endswith('.mp3'):
             os.remove(rutaCompleta)
+
+    with open("Enlaces.txt", "w") as file:
+        file.truncate()
 
 
 def firma():
