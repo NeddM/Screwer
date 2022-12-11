@@ -30,11 +30,12 @@ def separarNombreyExtension(archivo):
 
 
 def descargarAudioYoutube(archivo_enlaces):
+    i = 1
     with open(archivo_enlaces, 'r') as f:
         for enlace in f:
             ydl_opts = {
                 'format': 'bestaudio/best',
-                'outtmpl': '%(title)s.%(ext)s',
+                'outtmpl': f'{i} - %(title)s.%(ext)s',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
@@ -43,12 +44,12 @@ def descargarAudioYoutube(archivo_enlaces):
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([enlace])
-            os.system('youtube-dl --rm-cache-dir')
+            i += 1
+            subprocess.call('youtube-dl --rm-cache-dir', shell=True)
             limpiarPantalla()
 
 
 def ralentizaAudio(ruta, rutaMusica):
-    i = 1
     for archivo in rutaMusica:
         if archivo.endswith(".mp3"):
 
@@ -62,9 +63,7 @@ def ralentizaAudio(ruta, rutaMusica):
             nombreNuevo, extension = separarNombreyExtension(archivo)
 
             audio.export(
-                f"{ruta}/Procesado/{i} - {nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
-
-            i += 1
+                f"{ruta}/Procesado/{nombreNuevo} - SLOWED by pyPurped.{extension}", format="mp3")
 
     limpiarPantalla()
     print("¡Archivos exportados exitosamente!")
