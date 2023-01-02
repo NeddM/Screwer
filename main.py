@@ -2,7 +2,7 @@ import os
 import subprocess
 from time import sleep
 from pydub import AudioSegment
-import youtube_dl
+from yt_dlp import YoutubeDL
 
 
 def directorios():
@@ -42,8 +42,9 @@ def descargarAudioYoutube(archivo_enlaces):
                     'preferredquality': '320',
                 }]
             }
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([enlace])
+                ydl.cache.remove()
             i += 1
             subprocess.call('youtube-dl --rm-cache-dir', shell=True)
             limpiarPantalla()
