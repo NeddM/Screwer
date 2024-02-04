@@ -1,0 +1,20 @@
+name: Run pyPurped
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run_pypurped:
+    name: Run pyPurped
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run pyPurped
+        run: |
+          pip install -r requirements.txt
+          python3 main.py
+
+      - name: Ls
+        run: ls -la
