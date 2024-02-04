@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install ffmpeg
-        run: apt-get install ffmpeg
+        run: sudo apt-get install ffmpeg
 
       - name: Run pyPurped
         run: |
