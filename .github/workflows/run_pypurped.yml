@@ -17,4 +17,6 @@ jobs:
           python3 main.py
 
       - name: Ls
-        run: ls -la
+        run: |
+          ls -la
+          ls -la Procesado
